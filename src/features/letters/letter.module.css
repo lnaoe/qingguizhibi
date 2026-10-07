@@ -1,0 +1,184 @@
+.page {
+  min-height: 100dvh;
+  padding: var(--space-8) var(--layout-page-padding) var(--space-16);
+}
+
+.shell {
+  display: grid;
+  width: 100%;
+  max-width: var(--layout-letter-max);
+  margin: 0 auto;
+  gap: var(--space-8);
+}
+
+.backLink {
+  display: inline-flex;
+  min-height: var(--space-10);
+  width: fit-content;
+  align-items: center;
+  padding: var(--space-2) var(--space-4);
+  color: var(--color-ink);
+  border: var(--border-width) solid var(--color-secondary-border);
+  border-radius: var(--radius-button);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-small);
+  text-decoration: none;
+  transition: background-color 150ms ease-out;
+}
+
+.backLink:hover {
+  background-color: var(--color-paper-deep);
+}
+
+.header {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.title {
+  overflow-wrap: anywhere;
+  font-family: var(--font-family-serif);
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h1);
+}
+
+.recipientCard {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.avatarFallback {
+  display: grid;
+  width: var(--space-16);
+  height: var(--space-16);
+  flex: 0 0 var(--space-16);
+  place-items: center;
+  color: var(--color-white);
+  background-color: var(--color-seal);
+  border-radius: 50%;
+  font-family: var(--font-family-serif);
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-semibold);
+}
+
+.recipientCopy {
+  min-width: 0;
+}
+
+.recipientLabel {
+  color: var(--color-ink-light);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+}
+
+.recipientName {
+  margin-top: var(--space-1);
+  overflow-wrap: anywhere;
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h2);
+}
+
+.form {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.draftNotice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-ink-light);
+  background-color: var(--color-paper-deep);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.draftBadge {
+  flex: 0 0 auto;
+  color: var(--color-seal-dark);
+  font-weight: var(--font-weight-semibold);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.label {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-small);
+}
+
+.bodyInput {
+  min-height: 280px;
+  font-family: var(--font-family-serif);
+  font-size: var(--font-size-letter);
+  line-height: var(--line-height-letter);
+}
+
+.characterCount {
+  color: var(--color-ink-light);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+  text-align: right;
+}
+
+.fieldError,
+.formError {
+  color: var(--color-seal-dark);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+}
+
+.formError {
+  padding: var(--space-3);
+  background-color: #f7ece9;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.actions {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.cancelLink {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2) var(--space-5);
+  color: var(--color-ink);
+  background-color: transparent;
+  border: var(--border-width) solid var(--color-secondary-border);
+  border-radius: var(--radius-button);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-small);
+  text-decoration: none;
+  transition: background-color 150ms ease-out;
+}
+
+.cancelLink:hover {
+  background-color: var(--color-paper-deep);
+}
+
+.submitButton {
+  width: 100%;
+}
+
+@media (min-width: 430px) {
+  .actions {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  }
+}

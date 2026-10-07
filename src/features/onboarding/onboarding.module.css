@@ -1,0 +1,239 @@
+.page {
+  min-height: 100dvh;
+  padding: var(--space-8) var(--space-6) var(--space-12);
+}
+
+.shell {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.progress {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin-bottom: var(--space-10);
+}
+
+.progressSegment {
+  height: 3px;
+  background-color: var(--color-border);
+  border-radius: 999px;
+  transition: background-color 150ms ease-out;
+}
+
+.progressSegmentActive {
+  background-color: var(--color-seal);
+}
+
+.form {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.step {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.welcomeStep {
+  min-height: 58dvh;
+  align-content: center;
+  text-align: center;
+}
+
+.eyebrow {
+  color: var(--color-seal);
+  font-family: var(--font-family-serif);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+}
+
+.welcomeTitle {
+  max-width: 13em;
+  margin: 0 auto;
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-display);
+}
+
+.welcomeText,
+.description {
+  color: var(--color-ink-light);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.welcomeText {
+  max-width: 28em;
+  margin: 0 auto;
+}
+
+.stepHeader {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.title {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h1);
+}
+
+.field,
+.fieldset {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.label {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-small);
+}
+
+.select {
+  width: 100%;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-ink);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--color-ink);
+}
+
+.twoColumns {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.choiceGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.choice {
+  position: relative;
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-ink-light);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  text-align: center;
+  transition: border-color 150ms ease-out, background-color 150ms ease-out,
+    color 150ms ease-out;
+}
+
+.choice:hover {
+  border-color: var(--color-ink-light);
+}
+
+.choice:focus-within {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+.choiceSelected {
+  color: var(--color-ink);
+  background-color: var(--color-paper-deep);
+  border-color: var(--color-ink);
+  font-weight: var(--font-weight-semibold);
+}
+
+.choiceInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.reasonList {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.reasonChoice {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.selectionCount,
+.characterCount {
+  color: var(--color-ink-light);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+}
+
+.fieldError,
+.formError {
+  color: var(--color-seal-dark);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+}
+
+.formError {
+  padding: var(--space-3);
+  background-color: #f7ece9;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.continueButton {
+  flex: 1;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (min-width: 430px) {
+  .twoColumns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 560px) {
+  .choiceGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

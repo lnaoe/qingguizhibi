@@ -1,0 +1,66 @@
+.main {
+  display: grid;
+  min-height: 100dvh;
+  place-items: center;
+  padding: var(--layout-page-padding);
+}
+
+.intro {
+  width: 100%;
+  max-width: var(--layout-letter-max);
+  text-align: center;
+}
+
+.intro h1 {
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-display);
+}
+
+.intro p {
+  margin-top: var(--space-3);
+  color: var(--color-ink-light);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+.actions {
+  display: grid;
+  width: min(100%, calc(var(--space-20) * 4));
+  gap: var(--space-3);
+  margin: var(--space-10) auto 0;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--space-12);
+  padding: var(--space-2) var(--space-6);
+  border-radius: var(--radius-button);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.5;
+  text-decoration: none;
+  transition: background-color 150ms ease-out, border-color 150ms ease-out;
+}
+
+.primaryAction {
+  color: var(--color-white);
+  background-color: var(--color-ink);
+}
+
+.primaryAction:hover {
+  background-color: var(--color-ink-light);
+}
+
+.secondaryAction {
+  color: var(--color-ink);
+  background-color: transparent;
+  border: var(--border-width) solid var(--color-secondary-border);
+}
+
+.secondaryAction:hover {
+  background-color: var(--color-paper-deep);
+}

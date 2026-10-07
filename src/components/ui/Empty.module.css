@@ -1,0 +1,24 @@
+.empty {
+  text-align: center;
+  padding: var(--space-12) var(--space-6);
+  color: var(--color-ink-light);
+}
+
+.title {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-ink);
+  margin: 0 0 var(--space-3) 0;
+}
+
+.description {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  margin: 0 0 var(--space-6) 0;
+}
+
+.action {
+  margin-top: var(--space-4);
+}

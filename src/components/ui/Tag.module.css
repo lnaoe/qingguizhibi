@@ -1,0 +1,10 @@
+.tag {
+  display: inline-block;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  color: var(--color-ink-light);
+  background-color: var(--color-paper-deep);
+  border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-3);
+}

@@ -1,0 +1,16 @@
+.error {
+  text-align: center;
+  padding: var(--space-8) var(--space-6);
+  color: var(--color-seal);
+}
+
+.message {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  margin: 0 0 var(--space-4) 0;
+}
+
+.action {
+  margin-top: var(--space-4);
+}
