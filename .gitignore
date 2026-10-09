@@ -29,7 +29,7 @@ node_modules/
 /$null
 
 # local databases
-*.db
+#*.db
 /*.db-journal
 /*.db-shm
 /*.db-wal
