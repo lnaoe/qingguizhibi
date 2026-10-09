@@ -4,7 +4,7 @@ import type { FormEvent } from 'react';
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Button, Input, Textarea } from '@/components/ui';
+import { Avatar, Button, Input, Textarea } from '@/components/ui';
 import {
   AGE_RANGE_OPTIONS,
   INTEREST_OPTIONS,
@@ -30,6 +30,7 @@ export function ProfileEditForm({ initialValues }: ProfileEditFormProps) {
   const [errors, setErrors] = useState<ProfileErrors>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [avatarFailed, setAvatarFailed] = useState(false);
 
   function setField<Key extends keyof ProfileValues>(
     field: Key,
@@ -49,6 +50,11 @@ export function ProfileEditForm({ initialValues }: ProfileEditFormProps) {
       ? selected.filter((item) => item !== value)
       : [...selected, value];
     setField(field, nextValue);
+  }
+
+  function handleAvatarChange(value: string) {
+    setAvatarFailed(false);
+    setField('avatarUrl', value);
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -133,8 +139,26 @@ export function ProfileEditForm({ initialValues }: ProfileEditFormProps) {
                 placeholder="https://"
                 aria-invalid={Boolean(errors.avatarUrl)}
                 aria-describedby={errors.avatarUrl ? 'avatar-url-error' : undefined}
-                onChange={(event) => setField('avatarUrl', event.target.value)}
+                onChange={(event) => handleAvatarChange(event.target.value)}
               />
+              <div className={styles.avatarPreview}>
+                {values.avatarUrl && !avatarFailed ? (
+                  <Avatar
+                    src={values.avatarUrl}
+                    alt="头像预览"
+                    onError={() => setAvatarFailed(true)}
+                  />
+                ) : (
+                  <div className={styles.avatarFallback} aria-hidden="true">
+                    {(values.nickname.trim() || '我').slice(0, 1)}
+                  </div>
+                )}
+                <span className={styles.hint}>
+                  {values.avatarUrl && !avatarFailed
+                    ? '头像预览'
+                    : '暂时使用昵称首字作为头像'}
+                </span>
+              </div>
               {errors.avatarUrl && (
                 <p id="avatar-url-error" className={styles.fieldError}>
                   {errors.avatarUrl}

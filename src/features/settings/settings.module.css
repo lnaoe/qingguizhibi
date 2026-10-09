@@ -1,0 +1,177 @@
+.page {
+  min-height: 100dvh;
+  padding: var(--space-8) var(--space-5) var(--space-12);
+}
+
+.shell {
+  display: grid;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  gap: var(--space-6);
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.eyebrow {
+  color: var(--color-seal);
+  font-family: var(--font-family-serif);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+}
+
+.title {
+  margin-top: var(--space-1);
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h1);
+}
+
+.section {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.sectionTitle {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h2);
+}
+
+.sectionList {
+  overflow: hidden;
+  background-color: var(--color-white);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.sectionLink {
+  display: flex;
+  min-height: 80px;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  color: var(--color-ink);
+  text-decoration: none;
+  transition: background-color 150ms ease-out;
+}
+
+.sectionLink:hover {
+  background-color: var(--color-paper-deep);
+}
+
+.sectionLink:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: -2px;
+}
+
+.sectionCopy {
+  display: grid;
+  min-width: 0;
+  gap: var(--space-1);
+}
+
+.sectionLabel {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-small);
+}
+
+.sectionDescription,
+.currentValue {
+  color: var(--color-ink-light);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+}
+
+.currentValue {
+  color: var(--color-blue);
+}
+
+.chevron {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-top: 1.5px solid var(--color-ink-light);
+  border-right: 1.5px solid var(--color-ink-light);
+  transform: rotate(45deg);
+}
+
+.accountCard {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.accountField {
+  display: grid;
+  min-width: 0;
+  gap: var(--space-1);
+}
+
+.accountLabel {
+  color: var(--color-ink-light);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+}
+
+.accountValue {
+  overflow-wrap: anywhere;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+.signOutAction {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.signOutButton {
+  width: 100%;
+  min-height: 44px;
+}
+
+.signOutError {
+  color: var(--color-seal-dark);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+}
+
+.backLink {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  justify-self: start;
+  padding: var(--space-2) var(--space-5);
+  color: var(--color-ink);
+  background-color: transparent;
+  border: var(--border-width) solid var(--color-secondary-border);
+  border-radius: var(--radius-button);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.5;
+  text-decoration: none;
+  transition: background-color 150ms ease-out;
+}
+
+.backLink:hover {
+  background-color: var(--color-paper-deep);
+}
+
+.backLink:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+@media (min-width: 430px) {
+  .page {
+    padding-right: var(--space-6);
+    padding-left: var(--space-6);
+  }
+}

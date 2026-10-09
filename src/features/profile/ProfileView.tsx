@@ -10,6 +10,7 @@ interface ProfileViewProps {
 
 export function ProfileView({ snapshot }: ProfileViewProps) {
   const { values, interests } = snapshot;
+  const location = [values.country, values.city].filter(Boolean).join(' · ');
 
   return (
     <main className={styles.page}>
@@ -35,9 +36,7 @@ export function ProfileView({ snapshot }: ProfileViewProps) {
             )}
             <div className={styles.profileSummary}>
               <h2 className={styles.nickname}>{values.nickname}</h2>
-              <p className={styles.location}>
-                {values.country} · {values.city}
-              </p>
+              {location && <p className={styles.location}>{location}</p>}
               <span className={styles.visibility}>
                 {PROFILE_VISIBILITY_LABELS[values.visibility]}
               </span>
@@ -85,8 +84,8 @@ export function ProfileView({ snapshot }: ProfileViewProps) {
           </ul>
         </section>
 
-        <Link className={styles.secondaryLink} href="/">
-          返回首页
+        <Link className={styles.secondaryLink} href="/my">
+          返回我的
         </Link>
       </div>
     </main>
