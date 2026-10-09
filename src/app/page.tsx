@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { db } from '@/db/client';
 import { HomeView } from '@/features/home/HomeView';
 import { getHomeSnapshot } from '@/features/home/service';
+import { getUnreadNotificationCount } from '@/features/notifications/service';
 import { getOnboardingSnapshot } from '@/features/onboarding/service';
 import { getCurrentUser } from '@/lib/auth';
 import styles from "./page.module.css";
@@ -30,6 +31,7 @@ export default async function Home() {
         nickname={onboarding.values.nickname}
         todayEncounters={snapshot.todayEncounters}
         recentLetters={snapshot.recentLetters}
+        unreadNotificationCount={getUnreadNotificationCount(db, user.id)}
       />
     );
   }

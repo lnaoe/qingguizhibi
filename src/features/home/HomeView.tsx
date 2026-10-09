@@ -8,6 +8,7 @@ interface HomeViewProps {
   nickname: string;
   todayEncounters: DiscoveryPenpal[];
   recentLetters: HomeRecentLetter[];
+  unreadNotificationCount: number;
 }
 
 function formatLetterDate(value: string): string {
@@ -34,6 +35,7 @@ export function HomeView({
   nickname,
   todayEncounters,
   recentLetters,
+  unreadNotificationCount,
 }: HomeViewProps) {
   return (
     <main className={styles.page}>
@@ -46,9 +48,22 @@ export function HomeView({
               {nickname}，今天也可以慢慢认识一个人。
             </p>
           </div>
-          <Link className={styles.findLink} href="/find">
-            去找笔友
-          </Link>
+          <div className={styles.headerActions}>
+            <Link className={styles.notificationLink} href="/notifications">
+              <span>通知</span>
+              {unreadNotificationCount > 0 && (
+                <span
+                  className={styles.notificationCount}
+                  aria-label={`${unreadNotificationCount} 条未读通知`}
+                >
+                  {unreadNotificationCount}
+                </span>
+              )}
+            </Link>
+            <Link className={styles.findLink} href="/find">
+              去找笔友
+            </Link>
+          </div>
         </header>
 
         <div className={styles.content}>

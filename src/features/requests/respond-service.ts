@@ -3,11 +3,11 @@ import { and, eq, or } from 'drizzle-orm';
 import type { AppDatabase } from '../../db/client';
 import {
   blocks,
-  notifications,
   penpalRelationships,
   penpalRequests,
   profiles,
 } from '../../db/schema';
+import { createNotification } from '../notifications/service';
 import type {
   AcceptPenpalRequestResult,
   PenpalRelationshipRecord,
@@ -144,19 +144,14 @@ export function acceptPenpalRequest(
       .where(eq(profiles.userId, request.receiverId))
       .get();
 
-    transaction
-      .insert(notifications)
-      .values({
-        id: randomUUID(),
-        userId: request.senderId,
-        type: 'request_accepted',
-        title: `${receiverProfile?.nickname ?? '对方'} 接受了你的来信`,
-        body: null,
-        referenceType: 'penpal_request',
-        referenceId: request.id,
-        createdAt: now,
-      })
-      .run();
+    createNotification(transaction, {
+      userId: request.senderId,
+      type: 'request_accepted',
+      title: `${receiverProfile?.nickname ?? '对方'} 接受了你的来信`,
+      referenceType: 'penpal_request',
+      referenceId: request.id,
+      createdAt: now,
+    });
 
     return {
       ok: true,

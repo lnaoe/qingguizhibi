@@ -4,12 +4,12 @@ import type { AppDatabase } from '../../db/client';
 import {
   blocks,
   letters,
-  notifications,
   penpalRelationships,
   penpalRequests,
   profiles,
   users,
 } from '../../db/schema';
+import { createNotification } from '../notifications/service';
 import { validateCreateFirstContact } from './validation';
 import type { CreateFirstContactResult } from './types';
 
@@ -195,19 +195,15 @@ export function createFirstContact(
 
       transaction.insert(letters).values(letter).run();
       transaction.insert(penpalRequests).values(request).run();
-      transaction
-        .insert(notifications)
-        .values({
-          id: randomUUID(),
-          userId: receiverId,
-          type: 'penpal_request',
-          title: `${sender.nickname} 给你寄来了一封信`,
-          body: subject,
-          referenceType: 'penpal_request',
-          referenceId: requestId,
-          createdAt: now,
-        })
-        .run();
+      createNotification(transaction, {
+        userId: receiverId,
+        type: 'penpal_request',
+        title: `${sender.nickname} 给你寄来了一封信`,
+        body: subject,
+        referenceType: 'penpal_request',
+        referenceId: requestId,
+        createdAt: now,
+      });
 
       return {
         ok: true,
