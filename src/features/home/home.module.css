@@ -66,6 +66,48 @@
   background-color: var(--color-paper-deep);
 }
 
+.headerActions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.notificationLink {
+  display: inline-flex;
+  min-height: var(--space-10);
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  color: var(--color-ink);
+  background-color: transparent;
+  border: var(--border-width) solid var(--color-secondary-border);
+  border-radius: var(--radius-button);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-small);
+  text-decoration: none;
+  transition: background-color 150ms ease-out;
+}
+
+.notificationLink:hover {
+  background-color: var(--color-paper-deep);
+}
+
+.notificationCount {
+  display: inline-flex;
+  min-width: var(--space-5);
+  height: var(--space-5);
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-1);
+  color: var(--color-white);
+  background-color: var(--color-seal);
+  border-radius: 999px;
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+}
+
 .content {
   display: grid;
   gap: var(--space-large-gap);
@@ -294,7 +336,7 @@
     display: grid;
   }
 
-  .findLink {
+  .headerActions {
     justify-self: start;
   }
 }
