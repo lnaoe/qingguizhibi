@@ -83,6 +83,13 @@
   font-weight: var(--font-weight-semibold);
 }
 
+.avatarPreview {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
 .details {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
