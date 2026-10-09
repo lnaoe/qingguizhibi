@@ -19,7 +19,6 @@ export function SettingsView({ email, visibility }: SettingsViewProps) {
       <div className={styles.shell}>
         <header className={styles.header}>
           <div>
-            <p className={styles.eyebrow}>F07</p>
             <h1 className={styles.title}>设置</h1>
           </div>
         </header>

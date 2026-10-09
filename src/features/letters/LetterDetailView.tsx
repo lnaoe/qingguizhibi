@@ -29,7 +29,6 @@ export function LetterDetailView({
         </Link>
 
         <header className={styles.detailHeader}>
-          <p className={styles.detailEyebrow}>E02</p>
           <h1 className={styles.detailTitle}>
             {letter.subject || '无主题的信'}
           </h1>

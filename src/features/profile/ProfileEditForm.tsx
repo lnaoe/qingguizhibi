@@ -96,7 +96,6 @@ export function ProfileEditForm({ initialValues }: ProfileEditFormProps) {
       <div className={styles.shell}>
         <header className={styles.header}>
           <div>
-            <p className={styles.eyebrow}>F03</p>
             <h1 className={styles.title}>编辑资料</h1>
           </div>
         </header>

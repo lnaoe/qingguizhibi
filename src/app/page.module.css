@@ -5,9 +5,13 @@
   padding: var(--layout-page-padding);
 }
 
-.intro {
+.content {
   width: 100%;
   max-width: var(--layout-letter-max);
+}
+
+.intro {
+  width: 100%;
   text-align: center;
 }
 
@@ -63,4 +67,79 @@
 
 .secondaryAction:hover {
   background-color: var(--color-paper-deep);
+}
+
+.loginPanel {
+  display: block;
+  margin-top: var(--space-10);
+  padding: var(--space-8) var(--space-6);
+  background-color: var(--color-white);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.loginTitle {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h1);
+}
+
+.loginDescription {
+  margin-top: var(--space-3);
+  color: var(--color-ink-light);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.loginFooter {
+  margin-top: var(--space-8);
+  color: var(--color-ink-light);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  text-align: center;
+}
+
+.loginFooter p + p {
+  margin-top: var(--space-2);
+}
+
+.loginFooter a {
+  color: var(--color-seal);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+}
+
+.loginFooter a:hover {
+  text-decoration: underline;
+}
+
+@media (--bp-desktop) {
+  .content {
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(calc(var(--space-20) * 4.5), calc(var(--space-20) * 5.25));
+    gap: var(--space-16);
+    align-items: center;
+    max-width: var(--layout-content-max);
+  }
+
+  .intro {
+    text-align: left;
+  }
+
+  .actions {
+    width: min(100%, calc(var(--space-20) * 3));
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .secondaryAction {
+    display: none;
+  }
+
+  .loginPanel {
+    margin-top: 0;
+  }
 }

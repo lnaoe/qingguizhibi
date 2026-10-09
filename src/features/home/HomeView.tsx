@@ -1,4 +1,4 @@
-import { Avatar, Card, Empty, Tag } from '@/components/ui';
+import { Avatar, BottomNav, Card, Empty, Tag } from '@/components/ui';
 import Link from 'next/link';
 import type { DiscoveryPenpal } from '../discovery/types';
 import type { HomeRecentLetter } from './types';
@@ -175,7 +175,12 @@ export function HomeView({
             ) : (
               <div className={styles.letterList}>
                 {recentLetters.map((letter) => (
-                  <article key={letter.id} className={styles.letterItem}>
+                  <Link
+                    key={letter.id}
+                    className={styles.letterItem}
+                    href={`/letters/${encodeURIComponent(letter.id)}`}
+                    aria-label={`打开${letter.senderNickname}寄来的信`}
+                  >
                     {letter.senderAvatarUrl ? (
                       <Avatar
                         className={styles.letterAvatar}
@@ -210,13 +215,14 @@ export function HomeView({
                         {formatLetterDate(letter.sentAt)}
                       </time>
                     </div>
-                  </article>
+                  </Link>
                 ))}
               </div>
             )}
           </section>
         </div>
       </div>
+      <BottomNav active="home" />
     </main>
   );
 }

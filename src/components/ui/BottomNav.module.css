@@ -4,9 +4,12 @@
   bottom: 0;
   left: 0;
   right: 0;
+  width: min(100%, var(--layout-content-max));
+  height: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom));
+  margin-inline: auto;
+  padding-bottom: env(safe-area-inset-bottom);
   background-color: var(--color-white);
   border-top: 1px solid var(--color-border);
-  height: 60px;
   z-index: 40;
 }
 
@@ -19,13 +22,20 @@
   gap: var(--space-1);
   background: none;
   border: none;
+  min-width: 0;
   cursor: pointer;
   transition: color 150ms ease-out;
-  color: var(--color-ink-light);
+  color: var(--color-nav-inactive);
+  text-decoration: none;
 }
 
 .item:hover {
   color: var(--color-ink);
+}
+
+.item:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: -2px;
 }
 
 .active {
@@ -34,8 +44,19 @@
 }
 
 .icon {
-  font-size: 20px;
+  display: grid;
+  width: 20px;
+  height: 20px;
+  place-items: center;
   line-height: 1;
+}
+
+.icon svg {
+  display: block;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
 }
 
 .label {

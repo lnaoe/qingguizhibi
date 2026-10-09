@@ -1,6 +1,7 @@
 .page {
   min-height: 100dvh;
-  padding: var(--space-8) var(--space-5) var(--space-12);
+  padding: var(--space-8) var(--space-5)
+    calc(var(--space-12) + var(--bottom-nav-height));
 }
 
 .shell {
@@ -18,15 +19,7 @@
   gap: var(--space-4);
 }
 
-.eyebrow {
-  color: var(--color-seal);
-  font-family: var(--font-family-serif);
-  font-size: var(--font-size-small);
-  font-weight: var(--font-weight-semibold);
-}
-
 .title {
-  margin-top: var(--space-1);
   font-size: var(--font-size-h1);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-h1);

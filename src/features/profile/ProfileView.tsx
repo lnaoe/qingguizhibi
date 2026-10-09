@@ -17,7 +17,6 @@ export function ProfileView({ snapshot }: ProfileViewProps) {
       <div className={styles.shell}>
         <header className={styles.header}>
           <div>
-            <p className={styles.eyebrow}>F02</p>
             <h1 className={styles.title}>我的资料</h1>
           </div>
           <Link className={styles.primaryLink} href="/profile/edit">

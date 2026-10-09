@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Avatar, Empty, Error } from '@/components/ui';
+import { Avatar, BottomNav, Empty, Error } from '@/components/ui';
 import { formatLetterDate } from './format';
 import { MailboxTabs } from './MailboxTabs';
 import type { MailboxCriteria, SentPage } from './types';
@@ -23,7 +23,6 @@ export function MailboxSentView({
       <div className={styles.shell}>
         <header className={styles.header}>
           <div className={styles.headerCopy}>
-            <p className={styles.eyebrow}>E01</p>
             <h1 className={styles.title}>信箱</h1>
             <p className={styles.description}>
               看看那些已经寄出的信，慢慢等待回音。
@@ -134,6 +133,7 @@ export function MailboxSentView({
           )}
         </section>
       </div>
+      <BottomNav active="mailbox" />
     </main>
   );
 }

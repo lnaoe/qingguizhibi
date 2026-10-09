@@ -29,7 +29,10 @@ interface ReplyLetterFormProps {
   initialDraftId?: string;
   initialSubject?: string | null;
   initialBody?: string;
-  mode?: 'reply' | 'draft';
+  mode?: 'reply' | 'draft' | 'letter';
+  returnHref?: string;
+  returnLabel?: string;
+  title?: string;
 }
 
 type PendingAction = 'save' | 'send';
@@ -42,12 +45,28 @@ export function ReplyLetterForm({
   initialSubject,
   initialBody,
   mode = 'reply',
+  returnHref,
+  returnLabel,
+  title,
 }: ReplyLetterFormProps) {
   const router = useRouter();
   const isDraftMode = mode === 'draft';
-  const returnHref = sourceLetterId
-    ? `/letters/${sourceLetterId}`
-    : '/mailbox/drafts';
+  const resolvedReturnHref =
+    returnHref ??
+    (sourceLetterId
+      ? `/letters/${sourceLetterId}`
+      : isDraftMode
+        ? '/mailbox/drafts'
+        : '/relationships');
+  const resolvedReturnLabel =
+    returnLabel ??
+    (isDraftMode
+      ? '返回草稿箱'
+      : mode === 'letter'
+        ? '返回通信记录'
+        : '返回信件');
+  const resolvedTitle =
+    title ?? (isDraftMode ? '编辑草稿' : mode === 'letter' ? '写信' : '回信');
   const [draftId, setDraftId] = useState<string | null>(
     initialDraftId ?? null,
   );
@@ -78,7 +97,7 @@ export function ReplyLetterForm({
     setFormError(
       errorsResult?.request ??
         errorsResult?.relationship_id ??
-        '暂时无法处理这封回信，请稍后重试。',
+        '暂时无法处理这封信，请稍后重试。',
     );
   }
 
@@ -176,17 +195,12 @@ export function ReplyLetterForm({
   return (
     <main className={styles.page}>
       <div className={styles.shell}>
-        <Link className={styles.backLink} href={returnHref}>
-          {isDraftMode ? '返回草稿箱' : '返回信件'}
+        <Link className={styles.backLink} href={resolvedReturnHref}>
+          {resolvedReturnLabel}
         </Link>
 
         <header className={styles.header}>
-          <p className={styles.detailEyebrow}>
-            {isDraftMode ? 'E01' : 'E03'}
-          </p>
-          <h1 className={styles.title}>
-            {isDraftMode ? '编辑草稿' : '回信'}
-          </h1>
+          <h1 className={styles.title}>{resolvedTitle}</h1>
         </header>
 
         <Card className={styles.recipientCard}>
@@ -284,7 +298,7 @@ export function ReplyLetterForm({
           <div className={styles.replyActions}>
             <Link
               className={styles.cancelLink}
-              href={returnHref}
+              href={resolvedReturnHref}
             >
               取消
             </Link>

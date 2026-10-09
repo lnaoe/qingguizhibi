@@ -131,7 +131,6 @@ export function NotificationListView({
       <div className={styles.shell}>
         <header className={styles.header}>
           <div className={styles.headerCopy}>
-            <p className={styles.eyebrow}>F06</p>
             <h1 className={styles.title}>通知</h1>
             <p className={styles.description}>
               来信与回应会安静地留在这里。

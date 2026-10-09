@@ -1,6 +1,7 @@
 .page {
   min-height: 100dvh;
-  padding: var(--space-8) var(--layout-page-padding) var(--space-16);
+  padding: var(--space-8) var(--layout-page-padding)
+    calc(var(--space-16) + var(--bottom-nav-height));
 }
 
 .shell {
@@ -230,7 +231,18 @@
   min-width: 0;
   gap: var(--space-4);
   padding: var(--space-5) 0;
+  color: inherit;
+  text-decoration: none;
   border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.letterItem:hover .letterSubject {
+  color: var(--color-seal);
+}
+
+.letterItem:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 4px;
 }
 
 .letterAvatar {

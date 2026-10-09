@@ -121,7 +121,6 @@ export function RelationshipsView({
       <div className={styles.shell}>
         <header className={styles.header}>
           <div className={styles.headerCopy}>
-            <p className={styles.eyebrow}>F04</p>
             <h1 className={styles.title}>我的笔友</h1>
             <p className={styles.description}>
               和还在通信的人，慢慢写下去。

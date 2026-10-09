@@ -23,15 +23,26 @@ function readSessionCookie(response: Response): string {
   return setCookie.split(';')[0]!;
 }
 
-function postJson(init: { path: string; body: unknown; cookie?: string }) {
+function postJson(init: {
+  path: string;
+  body: unknown;
+  cookie?: string;
+  baseUrl?: string;
+  origin?: string;
+  host?: string;
+}) {
+  const baseUrl = init.baseUrl ?? BASE_URL;
   const headers: Record<string, string> = {
     'content-type': 'application/json',
-    origin: BASE_URL,
+    origin: init.origin ?? baseUrl,
   };
+  if (init.host) {
+    headers.host = init.host;
+  }
   if (init.cookie) {
     headers.cookie = init.cookie;
   }
-  return new Request(`${BASE_URL}/api/auth/${init.path}`, {
+  return new Request(`${baseUrl}/api/auth/${init.path}`, {
     method: 'POST',
     headers,
     body: JSON.stringify(init.body),
@@ -100,6 +111,81 @@ describe('auth', () => {
       }),
     );
     expect(signIn.status).toBe(401);
+  });
+
+  it('accepts authentication from another same-origin app address', async () => {
+    const { auth } = createTestAuth();
+    const networkHost = '192.168.1.10:3000';
+    const networkUrl = `http://${networkHost}`;
+    const email = 'network-user@example.com';
+    const password = 'a-valid-password';
+
+    const signUp = await auth.handler(
+      postJson({
+        path: 'sign-up/email',
+        body: { email, password, name: '纸笔' },
+        host: networkHost,
+        origin: networkUrl,
+      }),
+    );
+    expect(signUp.status).toBe(200);
+    const registerCookie = readSessionCookie(signUp);
+
+    const signOut = await auth.handler(
+      postJson({
+        path: 'sign-out',
+        body: {},
+        cookie: registerCookie,
+        host: networkHost,
+        origin: networkUrl,
+      }),
+    );
+    expect(signOut.status).toBe(200);
+
+    const signIn = await auth.handler(
+      postJson({
+        path: 'sign-in/email',
+        body: { email, password },
+        host: networkHost,
+        origin: networkUrl,
+      }),
+    );
+    expect(signIn.status).toBe(200);
+    const loginCookie = readSessionCookie(signIn);
+
+    const session = await auth.handler(
+      new Request(`${BASE_URL}/api/auth/get-session`, {
+        headers: { cookie: loginCookie, host: networkHost },
+      }),
+    );
+    expect(session.status).toBe(200);
+    await expect(session.json()).resolves.toMatchObject({
+      user: { email },
+    });
+  });
+
+  it('rejects authentication from an untrusted origin', async () => {
+    const { auth } = createTestAuth();
+    const email = 'cross-origin@example.com';
+    const password = 'a-valid-password';
+
+    const signUp = await auth.handler(
+      postJson({
+        path: 'sign-up/email',
+        body: { email, password, name: '纸笔' },
+      }),
+    );
+    expect(signUp.status).toBe(200);
+
+    const signIn = await auth.handler(
+      postJson({
+        path: 'sign-in/email',
+        body: { email, password },
+        origin: 'http://evil.example',
+      }),
+    );
+
+    expect(signIn.status).toBe(403);
   });
 
   it('requests and completes a password reset', async () => {

@@ -18,13 +18,6 @@
   gap: var(--space-4);
 }
 
-.eyebrow {
-  color: var(--color-seal);
-  font-family: var(--font-family-serif);
-  font-size: var(--font-size-small);
-  font-weight: var(--font-weight-semibold);
-}
-
 .title {
   margin-top: var(--space-1);
   font-size: var(--font-size-h1);

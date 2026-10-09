@@ -2,7 +2,6 @@
 
 import type { FormEvent } from 'react';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { Button, Input, Textarea } from '@/components/ui';
 import { completeOnboardingAction } from './actions';
 import {
@@ -30,7 +29,6 @@ const STEP_FIELDS: ReadonlyArray<ReadonlyArray<keyof OnboardingValues>> = [
 ];
 
 export function OnboardingFlow({ initialValues }: OnboardingFlowProps) {
-  const router = useRouter();
   const [step, setStep] = useState(0);
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState<OnboardingErrors>({});
@@ -107,8 +105,7 @@ export function OnboardingFlow({ initialValues }: OnboardingFlowProps) {
         return;
       }
 
-      router.replace('/');
-      router.refresh();
+      window.location.replace('/');
     } catch {
       setFormError('资料保存失败，请稍后重试。');
     } finally {
@@ -152,7 +149,6 @@ export function OnboardingFlow({ initialValues }: OnboardingFlowProps) {
           {step === 1 && (
             <section className={styles.step} aria-labelledby="basic-profile-title">
               <header className={styles.stepHeader}>
-                <p className={styles.eyebrow}>B02</p>
                 <h1 id="basic-profile-title" className={styles.title}>
                   基础资料
                 </h1>
@@ -301,7 +297,6 @@ export function OnboardingFlow({ initialValues }: OnboardingFlowProps) {
           {step === 2 && (
             <section className={styles.step} aria-labelledby="interests-title">
               <header className={styles.stepHeader}>
-                <p className={styles.eyebrow}>B03</p>
                 <h1 id="interests-title" className={styles.title}>
                   兴趣
                 </h1>
@@ -347,7 +342,6 @@ export function OnboardingFlow({ initialValues }: OnboardingFlowProps) {
           {step === 3 && (
             <section className={styles.step} aria-labelledby="about-title">
               <header className={styles.stepHeader}>
-                <p className={styles.eyebrow}>B04</p>
                 <h1 id="about-title" className={styles.title}>
                   关于我
                 </h1>
@@ -381,7 +375,6 @@ export function OnboardingFlow({ initialValues }: OnboardingFlowProps) {
           {step === 4 && (
             <section className={styles.step} aria-labelledby="reason-title">
               <header className={styles.stepHeader}>
-                <p className={styles.eyebrow}>B05</p>
                 <h1 id="reason-title" className={styles.title}>
                   为什么想找笔友
                 </h1>

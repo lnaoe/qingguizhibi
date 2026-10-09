@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Avatar, Card } from '@/components/ui';
+import { Avatar, BottomNav, Card } from '@/components/ui';
 import { PROFILE_VISIBILITY_LABELS } from '../profile/options';
 import type { ProfileSnapshot } from '../profile/types';
 import { ME_SECTIONS } from './entries';
@@ -18,7 +18,6 @@ export function MeView({ snapshot }: MeViewProps) {
       <div className={styles.shell}>
         <header className={styles.header}>
           <div>
-            <p className={styles.eyebrow}>F01</p>
             <h1 className={styles.title}>我的</h1>
           </div>
         </header>
@@ -58,6 +57,7 @@ export function MeView({ snapshot }: MeViewProps) {
           ))}
         </nav>
       </div>
+      <BottomNav active="me" />
     </main>
   );
 }

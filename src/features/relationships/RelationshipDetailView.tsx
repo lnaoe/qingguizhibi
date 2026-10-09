@@ -48,13 +48,13 @@ export function RelationshipDetailView({
   const isActive = relationship.status === 'active';
   const peerMeta = getPeerMeta(relationship);
   const latestHref = `/relationships/${encodeURIComponent(relationship.id)}`;
+  const writeHref = `${latestHref}/write`;
 
   return (
     <main className={styles.page}>
       <div className={styles.detailShell}>
         <header className={styles.header}>
           <div className={styles.headerCopy}>
-            <p className={styles.eyebrow}>F05</p>
             <h1 className={styles.title}>
               和{relationship.peer.nickname}的通信
             </h1>
@@ -62,9 +62,16 @@ export function RelationshipDetailView({
               从第一封信开始，慢慢写到这里。
             </p>
           </div>
-          <Link className={styles.headerAction} href="/relationships">
-            我的笔友
-          </Link>
+          <div className={styles.headerActions}>
+            {isActive && (
+              <Link className={styles.writeAction} href={writeHref}>
+                写信
+              </Link>
+            )}
+            <Link className={styles.headerAction} href="/relationships">
+              我的笔友
+            </Link>
+          </div>
         </header>
 
         <Card className={styles.profileCard}>
@@ -155,31 +162,39 @@ export function RelationshipDetailView({
 
                 return (
                   <li key={letter.id}>
-                    <article className={styles.letterItem}>
-                      <div className={styles.letterHeading}>
-                        <span
-                          className={`${styles.direction} ${
-                            letter.isMine
-                              ? styles.directionMine
-                              : styles.directionReceived
-                          }`}
+                    <Link
+                      className={styles.letterLink}
+                      href={`/letters/${encodeURIComponent(letter.id)}`}
+                      aria-label={`查看${
+                        letter.subject || '无主题的信'
+                      }`}
+                    >
+                      <article className={styles.letterItem}>
+                        <div className={styles.letterHeading}>
+                          <span
+                            className={`${styles.direction} ${
+                              letter.isMine
+                                ? styles.directionMine
+                                : styles.directionReceived
+                            }`}
+                          >
+                            {letter.isMine ? '我寄出' : '收到来信'}
+                          </span>
+                          {isUnread && (
+                            <span className={styles.unread}>未读来信</span>
+                          )}
+                        </div>
+                        <h3 className={styles.letterSubject}>
+                          {letter.subject || '无主题的信'}
+                        </h3>
+                        <time
+                          className={styles.letterDate}
+                          dateTime={letter.sentAt}
                         >
-                          {letter.isMine ? '我寄出' : '收到来信'}
-                        </span>
-                        {isUnread && (
-                          <span className={styles.unread}>未读来信</span>
-                        )}
-                      </div>
-                      <h3 className={styles.letterSubject}>
-                        {letter.subject || '无主题的信'}
-                      </h3>
-                      <time
-                        className={styles.letterDate}
-                        dateTime={letter.sentAt}
-                      >
-                        {formatDate(letter.sentAt)}
-                      </time>
-                    </article>
+                          {formatDate(letter.sentAt)}
+                        </time>
+                      </article>
+                    </Link>
                   </li>
                 );
               })}

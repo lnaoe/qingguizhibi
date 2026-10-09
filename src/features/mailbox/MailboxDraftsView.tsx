@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Avatar, Empty, Error } from '@/components/ui';
+import { Avatar, BottomNav, Empty, Error } from '@/components/ui';
 import { formatLetterDate } from './format';
 import { MailboxTabs } from './MailboxTabs';
 import type { DraftPage, MailboxCriteria } from './types';
@@ -23,7 +23,6 @@ export function MailboxDraftsView({
       <div className={styles.shell}>
         <header className={styles.header}>
           <div className={styles.headerCopy}>
-            <p className={styles.eyebrow}>E01</p>
             <h1 className={styles.title}>信箱</h1>
             <p className={styles.description}>
               还没寄出的想法，可以在这里慢慢写完。
@@ -140,6 +139,7 @@ export function MailboxDraftsView({
           )}
         </section>
       </div>
+      <BottomNav active="mailbox" />
     </main>
   );
 }

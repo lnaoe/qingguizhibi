@@ -18,6 +18,40 @@ export interface CreateAuthOptions {
   sendResetPassword?: (data: ResetPasswordData) => Promise<void>;
 }
 
+function getTrustedOrigins(request?: Request): string[] {
+  const origins = new Set<string>([getAppUrl()]);
+
+  if (request) {
+    try {
+      origins.add(new URL(request.url).origin);
+    } catch {
+      // Keep the configured origin when the request URL cannot be parsed.
+    }
+
+    const host =
+      request.headers.get('x-forwarded-host') ?? request.headers.get('host');
+    const normalizedHost = host?.split(',')[0]?.trim();
+    const forwardedProtocol = request.headers
+      .get('x-forwarded-proto')
+      ?.split(',')[0]
+      ?.trim();
+
+    if (normalizedHost) {
+      try {
+        const protocol =
+          forwardedProtocol === 'https' || forwardedProtocol === 'http'
+            ? forwardedProtocol
+            : new URL(request.url).protocol.slice(0, -1);
+        origins.add(new URL(`${protocol}://${normalizedHost}`).origin);
+      } catch {
+        // Ignore malformed host headers and retain the configured origin.
+      }
+    }
+  }
+
+  return [...origins];
+}
+
 async function sendConfiguredResetPassword(): Promise<void> {
   throw new Error('Password reset email delivery is not configured.');
 }
@@ -28,6 +62,7 @@ export function createAuth(
 ) {
   return betterAuth({
     baseURL: getAppUrl(),
+    trustedOrigins: getTrustedOrigins,
     secret: process.env.BETTER_AUTH_SECRET,
     database: drizzleAdapter(database, {
       provider: 'sqlite',
@@ -37,6 +72,9 @@ export function createAuth(
       enabled: true,
       sendResetPassword:
         options.sendResetPassword ?? sendConfiguredResetPassword,
+    },
+    advanced: {
+      disableOriginCheck: false,
     },
     plugins: [nextCookies()],
   });

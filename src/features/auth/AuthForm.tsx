@@ -2,7 +2,6 @@
 
 import type { FormEvent } from 'react';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { Button, Input } from '@/components/ui';
 import { authClient } from '@/lib/auth-client';
 import {
@@ -19,7 +18,6 @@ interface AuthFormProps {
 }
 
 export function AuthForm({ mode }: AuthFormProps) {
-  const router = useRouter();
   const isRegister = mode === 'register';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -79,8 +77,7 @@ export function AuthForm({ mode }: AuthFormProps) {
         return;
       }
 
-      router.replace('/onboarding');
-      router.refresh();
+      window.location.replace('/');
     } catch (error) {
       setFormError(
         getAuthErrorMessage(

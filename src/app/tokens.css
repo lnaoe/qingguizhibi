@@ -18,6 +18,7 @@
   --color-gold: #b29563;
   --color-border: #ded8ce;
   --color-secondary-border: #d8d1c7;
+  --color-nav-inactive: #9b958d;
   --border-width: 1px;
 
   /* Typography */
@@ -73,4 +74,5 @@
   --layout-page-padding: var(--space-page-x);
   --layout-content-max: 1200px;
   --layout-letter-max: 760px;
+  --bottom-nav-height: 60px;
 }

@@ -1,5 +1,14 @@
 import Link from 'next/link';
-import { Avatar, Button, Card, Empty, Error, Input, Tag } from '@/components/ui';
+import {
+  Avatar,
+  BottomNav,
+  Button,
+  Card,
+  Empty,
+  Error,
+  Input,
+  Tag,
+} from '@/components/ui';
 import {
   AGE_RANGE_OPTIONS,
   INTEREST_OPTIONS,
@@ -77,7 +86,6 @@ export function FindView({ criteria, page, errorMessage }: FindViewProps) {
       <div className={styles.shell}>
         <header className={styles.header}>
           <div className={styles.headerCopy}>
-            <p className={styles.eyebrow}>D01</p>
             <h1 className={styles.title}>找笔友</h1>
             <p className={styles.description}>
               用一点条件，找到愿意慢慢写信的人。
@@ -258,6 +266,7 @@ export function FindView({ criteria, page, errorMessage }: FindViewProps) {
           )}
         </section>
       </div>
+      <BottomNav active="find" />
     </main>
   );
 }

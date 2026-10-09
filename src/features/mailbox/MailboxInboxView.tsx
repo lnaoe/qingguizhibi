@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Avatar, Empty, Error } from '@/components/ui';
+import { Avatar, BottomNav, Empty, Error } from '@/components/ui';
 import { formatLetterDate } from './format';
 import { MailboxTabs } from './MailboxTabs';
 import type { InboxPage, MailboxCriteria } from './types';
@@ -23,7 +23,6 @@ export function MailboxInboxView({
       <div className={styles.shell}>
         <header className={styles.header}>
           <div className={styles.headerCopy}>
-            <p className={styles.eyebrow}>E01</p>
             <h1 className={styles.title}>信箱</h1>
             <p className={styles.description}>
               慢慢读每一封寄来的信，不急着回。
@@ -142,6 +141,7 @@ export function MailboxInboxView({
           )}
         </section>
       </div>
+      <BottomNav active="mailbox" />
     </main>
   );
 }
